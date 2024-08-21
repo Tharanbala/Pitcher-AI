@@ -8,7 +8,7 @@ const HomeCard = () => {
         <div className="aspect-w-16 aspect-h-9 h-96"> 
           <iframe
             className="w-full h-full"
-            src="" // Replace with your actual video URL
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ" // Replace with your actual AI video demo URL
             title="Product Demo Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
