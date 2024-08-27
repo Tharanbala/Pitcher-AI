@@ -4,7 +4,7 @@ import groq
 import os
 import json
 from dotenv import load_dotenv, find_dotenv
-from getpitch import *
+from server.pitcher.PitchGenerate.getpitch import *
 
 # Set the OpenAI API key
 load_dotenv()
