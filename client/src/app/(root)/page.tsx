@@ -57,28 +57,25 @@ const HomePage = () => {
               <p className="text-base md:text-lg text-foreground/80 mt-6 text-center">
                 Pitcher AI Your Ultimate Product Review Companion
               </p>
-              <div className="hidden md:flex relative items-center justify-center mt-8 md:mt-12 w-full">
-                <Link
-                  href="#"
-                  className="flex items-center justify-center w-max rounded-full border-t border-foreground/30 bg-white/20 backdrop-blur-lg px-2 py-1 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none"
-                >
-                  <form className="flex items-center gap-2 px-4">
+              <div className="flex flex-col items-center justify-center mt-8 md:mt-12 w-full">
+                <div className="flex items-center justify-center w-full max-w-lg rounded-full border-t border-foreground/30 backdrop-blur-lg px-2 py-2 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none bg-white/20 md:bg-white/20">
+                  <form className="flex flex-col md:flex-row items-center gap-2 px-4 w-full">
                     <input
                       type="email"
                       placeholder="Enter your email for waiting list"
-                      className=" w-48 md:w-64 lg:w-80 px-4 py-2 md:py-2 rounded-full bg-black text-sm md:text-base text-foreground shadow-inner focus:outline-none"
+                      className="w-full md:w-64 lg:w-80 px-4 py-2 rounded-full bg-black text-sm md:text-base text-foreground shadow-inner focus:outline-none"
                       required
                     />
                     <Button
                       size="sm"
                       type="submit"
-                      className="rounded-full border border-foreground/20"
+                      className="mt-2 md:mt-0 md:ml-2 rounded-full border border-foreground/20"
                     >
                       Join Waitlist
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>
                   </form>
-                </Link>
+                </div>
               </div>
             </div>
 
