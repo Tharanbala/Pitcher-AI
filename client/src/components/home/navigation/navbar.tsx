@@ -22,13 +22,13 @@ const Navbar = async () => {
                     </div>
                     <nav className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         <ul className="flex items-center justify-center gap-8">
-                            <Link href="#" className="hover:text-foreground/80 text-sm">Pricing</Link>
+                            {/* <Link href="#" className="hover:text-foreground/80 text-sm">Pricing</Link> */}
                             <Link href="#" className="hover:text-foreground/80 text-sm">About</Link>
                             <Link href="#" className="hover:text-foreground/80 text-sm">Features</Link>
                         </ul>
                     </nav>
                     <div className="flex items-center gap-4">
-                        {user ? (
+                        {/* {user ? (
                             <UserButton />
                         ) : (
                             <>
@@ -39,7 +39,10 @@ const Navbar = async () => {
                                     Start free trial
                                 </Link>
                             </>
-                        )}
+                        )} */}
+                        <button className={buttonVariants({ size: "sm", className: "hidden md:flex" })}>
+                            Join Waitlist
+                        </button>
                     </div>
                 </div>
             </Container>

@@ -52,10 +52,10 @@ const HomePage = () => {
 
             <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
               <h1 className="text-4xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
-                Pitcher AI Your Ultimate Product Review Companion
+              Turning Reviews into Winning Pitches
               </h1>
               <p className="text-base md:text-lg text-foreground/80 mt-6 text-center">
-                Pitcher AI Your Ultimate Product Review Companion
+              Shaping success from customer feedback
               </p>
               <div className="flex flex-col items-center justify-center mt-8 md:mt-12 w-full">
                 <div className="flex items-center justify-center w-full max-w-lg rounded-full border-t border-foreground/30 backdrop-blur-lg px-2 py-2 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none bg-white/20 md:bg-white/20">
@@ -177,7 +177,7 @@ const HomePage = () => {
       </Wrapper>
 
       {/* pricing */}
-      <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+      {/* <Wrapper className="flex flex-col items-center justify-center py-12 relative">
         <div className="hidden md:block absolute top-0 -right-1/3 w-72 h-72 bg-blue-500 rounded-full blur-[10rem] -z-10"></div>
         <Container>
           <div className="max-w-md mx-auto text-start md:text-center">
@@ -236,10 +236,10 @@ const HomePage = () => {
             ))}
           </div>
         </Container>
-      </Wrapper>
+      </Wrapper> */}
 
       {/* testimonials */}
-      <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+      {/* <Wrapper className="flex flex-col items-center justify-center py-12 relative">
         <div className="hidden md:block absolute -top-1/4 -left-1/3 w-72 h-72 bg-indigo-500 rounded-full blur-[10rem] -z-10"></div>
         <Container>
           <div className="max-w-md mx-auto text-start md:text-center">
@@ -317,7 +317,7 @@ const HomePage = () => {
             </div>
           </div>
         </Container>
-      </Wrapper>
+      </Wrapper> */}
     </section>
   );
 };
