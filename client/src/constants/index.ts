@@ -20,19 +20,34 @@ export const perks = [
 
 export const features = [
     {
-        icon: Icons.bolt,
-        title: "Fast Setup",
-        info: "Get your website up and running in minutes with our intuitive AI-powered builder.",
+        icon: Icons.search,
+        title: "Universal Product Search",
+        info: "Instantly search and analyze the most relevant pros and cons of any product from a wide range of platforms like Amazon and Reddit to gather reviews and insights for pitch creation.",
     },
     {
         icon: Icons.palette,
-        title: "Customizable Templates",
-        info: "Choose from a variety of stunning templates and customize them to suit your brand.",
+        title: "AI-Driven Insights",
+        info: "Leverage advanced State of the Art LLM to transform customer reviews into actionable marketing pitches tailored for your audience.",
     },
     {
         icon: Icons.seo,
-        title: "SEO Optimized",
-        info: "Built-in SEO features ensure your website ranks well on search engines.",
+        title: "Personalized Audience Segmentation",
+        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
+    },
+    {
+        icon: Icons.seo,
+        title: "Personalized Audience Segmentation",
+        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
+    },
+    {
+        icon: Icons.seo,
+        title: "Personalized Audience Segmentation",
+        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
+    },
+    {
+        icon: Icons.seo,
+        title: "Personalized Audience Segmentation",
+        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
     }
 ];
 
