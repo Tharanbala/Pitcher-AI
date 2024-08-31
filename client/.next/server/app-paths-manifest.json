@@ -1,4 +1,3 @@
 {
-  "/api/submit-email/route": "app/api/submit-email/route.js",
   "/(root)/page": "app/(root)/page.js"
 }
