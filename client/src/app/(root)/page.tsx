@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Icons, Wrapper } from "@/components";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { Button } from "@/components/ui/button";
@@ -18,10 +20,39 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, ChevronRight, UserIcon, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const HomePage = () => {
   const firstRow = reviews.slice(0, reviews.length / 2);
   const secondRow = reviews.slice(reviews.length / 2);
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('/api/submit-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      if (response.ok) {
+        alert('Email submitted successfully');
+        // Clear the input field or show a success message
+        setEmail('');
+      } else {
+        console.error('Error submitting email');
+        // Show an error message to the user
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Show an error message to the user
+      setEmail('');
+    }
+  };
 
   return (
     <section className="w-full relative flex items-center justify-center flex-col px-4 md:px-0 py-8">
@@ -49,22 +80,28 @@ const HomePage = () => {
                 <ChevronRight className="w-4 h-4" />
               </span>
             </button>
-
-            <div className="flex flex-col items-center mt-8 max-w-3xl w-11/12 md:w-full">
-              <h1 className="text-4xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
-              Turning Reviews into Winning Pitches
+            <div className="flex flex-col items-center mt-8 max-w-4xl w-11/12 md:w-full">
+              <h1 className=" max-w-3xl text-6xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
+                Turning Reviews into{" "}
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Winning Pitches</span>
               </h1>
-              <p className="text-base md:text-lg text-foreground/80 mt-6 text-center">
-              Shaping success from customer feedback
+              <p className=" max-w-xl text-base  md:text-lg text-foreground/80 mt-6 text-center">
+              Pitcher AI converts product reviews into impactful social media pitches using AI.
               </p>
               <div className="flex flex-col items-center justify-center mt-8 md:mt-12 w-full">
                 <div className="flex items-center justify-center w-full max-w-lg rounded-full border-t border-foreground/30 backdrop-blur-lg px-2 py-2 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none bg-white/20 md:bg-white/20">
-                  <form className="flex flex-col md:flex-row items-center gap-2 px-4 w-full">
+                  {/* Form for waitlist */}
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col md:flex-row items-center gap-2 px-4 w-full"
+                  >
                     <input
                       type="email"
                       placeholder="Enter your email for waiting list"
                       className="w-full md:w-64 lg:w-80 px-4 py-2 rounded-full bg-black text-sm md:text-base text-foreground shadow-inner focus:outline-none"
                       required
+                      value={email}
+                      onChange={(e: any) => setEmail(e.target.value)}
                     />
                     <Button
                       size="sm"
@@ -75,6 +112,7 @@ const HomePage = () => {
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>
                   </form>
+                  {/* Form for waitlist */}
                 </div>
               </div>
             </div>
@@ -104,7 +142,7 @@ const HomePage = () => {
           <div className="max-w-md mx-auto text-start md:text-center">
             <SectionBadge title="The Process" />
             <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-              Three steps to build your dream campain
+              Three steps to build your perfect pitches
             </h2>
             <p className="text-muted-foreground mt-6">
               Turn your vision into reality in just 3 simple steps
@@ -144,8 +182,8 @@ const HomePage = () => {
               Discover our powerful features
             </h2>
             <p className="text-muted-foreground mt-6">
-              Astra offers a range of features to help you build a stunning
-              website in no time
+              Pitcher AI offers a range of features to help you create pitches
+              from review
             </p>
           </div>
         </Container>
