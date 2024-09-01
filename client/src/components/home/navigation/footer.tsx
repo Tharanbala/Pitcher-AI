@@ -16,10 +16,7 @@ const Footer = () => {
           <p className="text-muted-foreground mt-4 text-sm text-start">
           Turning Reviews into Winning Pitches
           </p>
-          <span className="mt-4 text-neutral-200 text-sm flex items-center">
-            Made in India with
-            <Heart className="w-3.5 h-3.5 ml-1 fill-primary text-primary" />
-          </span>
+          
         </div>
 
         <div className="grid-cols-2 gap-8 grid mt-16 xl:col-span-2 xl:mt-0">
@@ -53,69 +50,16 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="mt-10 md:mt-0 flex flex-col">
-              <h3 className="text-base font-medium text-white">Socials</h3>
-              <ul className="mt-2 text-sm text-muted-foreground">
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    LinkedIn
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Twitter
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Instagram
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            
           </div>
           <div className="md:grid md:grid-cols-2 md:gap-8">
-            <div className="mt-10 md:mt-0 flex flex-col">
-              <h3 className="text-base font-medium text-white">Company</h3>
-              <ul className="mt-4 text-sm text-muted-foreground">
-                <li>
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Terms & Conditions
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            
             {/* Team Section */}
             <div className="mt-10 md:mt-0 flex flex-col">
+              <a href='/team'>
               <h3 className="text-base font-medium text-white">Meet the Team</h3>
+              </a>
+              
               <ul className="mt-1 text-sm text-muted-foreground">
                 <li className="mt-2">
                   <Link
