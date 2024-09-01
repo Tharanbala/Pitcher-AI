@@ -1,3 +1,5 @@
+/* The commented code block you provided is a TypeScript code snippet that seems to be part of a
+Next.js server-side middleware function. Here is a breakdown of what it is doing: */
 import { NextResponse } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 

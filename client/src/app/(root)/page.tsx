@@ -20,37 +20,73 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, ChevronRight, UserIcon, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
   const firstRow = reviews.slice(0, reviews.length / 2);
   const secondRow = reviews.slice(reviews.length / 2);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+
+  // State for countdown timer
+  const [days, setDays] = useState(10);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  // Calculate the difference between the current date and the target launch date
+  useEffect(() => {
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 10); // 10 days from now
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetDate.getTime() - now;
+
+      const newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const newHours = Math.floor(
+        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const newMinutes = Math.floor(
+        (difference % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      setDays(newDays);
+      setHours(newHours);
+      setMinutes(newMinutes);
+      setSeconds(newSeconds);
+    };
+
+    const intervalId = setInterval(updateCountdown, 1000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     try {
-      const response = await fetch('/api/submit-email', {
-        method: 'POST',
+      const response = await fetch("/api/submit-email", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
-  
+
       if (response.ok) {
-        alert('Email submitted successfully');
+        alert("Email submitted successfully");
         // Clear the input field or show a success message
-        setEmail('');
+        setEmail("");
       } else {
-        console.error('Error submitting email');
+        console.error("Error submitting email");
         // Show an error message to the user
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Show an error message to the user
-      setEmail('');
+      setEmail("");
     }
   };
 
@@ -83,10 +119,13 @@ const HomePage = () => {
             <div className="flex flex-col items-center mt-8 max-w-4xl w-11/12 md:w-full">
               <h1 className=" max-w-3xl text-6xl md:text-6xl lg:textxl md:!leading-snug font-semibold text-center bg-clip-text bg-gradient-to-b from-gray-50 to-gray-50 text-transparent">
                 Turning Reviews into{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Winning Pitches</span>
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                  Winning Pitches
+                </span>
               </h1>
               <p className=" max-w-xl text-base  md:text-lg text-foreground/80 mt-6 text-center">
-              Pitcher AI converts product reviews into impactful social media pitches using AI.
+                Pitcher AI converts product reviews into impactful social media
+                pitches using AI.
               </p>
               <div className="flex flex-col items-center justify-center mt-8 md:mt-12 w-full">
                 <div className="flex items-center justify-center w-full max-w-lg rounded-full border-t border-foreground/30 backdrop-blur-lg px-2 py-2 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none bg-white/20 md:bg-white/20">
@@ -101,23 +140,31 @@ const HomePage = () => {
                       className="w-full md:w-64 lg:w-80 px-4 py-2 rounded-full bg-black text-sm md:text-base text-foreground shadow-inner focus:outline-none"
                       required
                       value={email}
-                      onChange={(e: any) => setEmail(e.target.value)}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setEmail(e.target.value)
+                      }
                     />
                     <Button
                       size="sm"
                       type="submit"
-                      className="mt-2 md:mt-0 md:ml-2 rounded-full border border-foreground/20"
+                      className="mt-2 md:mt-0 md:ml-2 rounded-full border border-foreground/20 active:animate-pulse"
+                      onClick={() => {
+                        if ("vibrate" in window.navigator) {
+                          window.navigator.vibrate(100); // Vibrate for 100 milliseconds
+                        }
+                      }}
                     >
                       Join Waitlist
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>
                   </form>
+
                   {/* Form for waitlist */}
                 </div>
               </div>
             </div>
 
-            <div className="relative flex items-center py-10 md:py-20 w-full">
+            {/* <div className="relative flex items-center py-10 md:py-20 w-full">
               <div className="absolute top-1/2 left-1/2 -z-10 gradient w-3/4 -translate-x-1/2 h-3/4 -translate-y-1/2 inset-0 blur-[10rem]"></div>
               <div className="-m-2 rounded-xl p-2 ring-1 ring-inset ring-foreground/20 lg:-m-4 lg:rounded-2xl bg-opacity-50 backdrop-blur-3xl">
                 <Image
@@ -130,6 +177,38 @@ const HomePage = () => {
                 />
 
                 <BorderBeam size={250} duration={12} delay={9} />
+              </div>
+            </div> */}
+            {/* Countdown Timer */}
+            <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
+              <h2 className="text-2xl font-semibold mb-4">
+                Product Launch Countdown
+              </h2>
+              <div className="flex items-center justify-center gap-4">
+                <div className="text-center">
+                  <span id="days" className="text-4xl font-bold">
+                    {days}
+                  </span>
+                  <p>Days</p>
+                </div>
+                <div className="text-center">
+                  <span id="hours" className="text-4xl font-bold">
+                    {hours}
+                  </span>
+                  <p>Hours</p>
+                </div>
+                <div className="text-center">
+                  <span id="minutes" className="text-4xl font-bold">
+                    {minutes}
+                  </span>
+                  <p>Minutes</p>
+                </div>
+                <div className="text-center">
+                  <span id="seconds" className="text-4xl font-bold">
+                    {seconds}
+                  </span>
+                  <p>Seconds</p>
+                </div>
               </div>
             </div>
           </div>
