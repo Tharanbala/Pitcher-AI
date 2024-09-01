@@ -1,19 +1,34 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
+interface Credentials {
+  type: string;
+  project_id: string;
+  private_key_id: string;
+  private_key: string;
+  client_email: string;
+  client_id: string;
+  auth_uri: string;
+  token_uri: string;
+  auth_provider_x509_cert_url: string;
+  client_x509_cert_url: string;
+}
+
+const credentials: Credentials = {
+  type: process.env.GOOGLE_TYPE as string,
+  project_id: process.env.GOOGLE_PROJECT_ID as string,
+  private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID as string,
+  private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') as string,
+  client_email: process.env.GOOGLE_CLIENT_EMAIL as string,
+  client_id: process.env.GOOGLE_CLIENT_ID as string,
+  auth_uri: process.env.GOOGLE_AUTH_URI as string,
+  token_uri: process.env.GOOGLE_TOKEN_URI as string,
+  auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL as string,
+  client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL as string,
+};
+
 const auth = new google.auth.GoogleAuth({
-  credentials: {
-    type: process.env.GOOGLE_TYPE,
-    project_id: process.env.GOOGLE_PROJECT_ID,
-    private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Replace escaped newlines
-    client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    client_id: process.env.GOOGLE_CLIENT_ID,
-    auth_uri: process.env.GOOGLE_AUTH_URI,
-    token_uri: process.env.GOOGLE_TOKEN_URI,
-    auth_provider_x509_cert_url: process.env.GOOGLE_AUTH_PROVIDER_CERT_URL,
-    client_x509_cert_url: process.env.GOOGLE_CLIENT_CERT_URL,
-  },
+  credentials,
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
@@ -24,7 +39,7 @@ export async function POST(req: Request) {
     const { email } = await req.json();
     
     await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      spreadsheetId: process.env.GOOGLE_SHEET_ID as string,
       range: 'Sheet1!A:A',
       valueInputOption: 'USER_ENTERED',
       requestBody: {
