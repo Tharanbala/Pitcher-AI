@@ -28,33 +28,48 @@ const HomePage = () => {
   const [email, setEmail] = useState("");
 
   // State for countdown timer
-  const [days, setDays] = useState(10);
+  const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  // Calculate the difference between the current date and the target launch date
   useEffect(() => {
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 10); // 10 days from now
+    const savedTargetDate = localStorage.getItem("targetDate");
+    let targetDate: Date;
+
+    if (savedTargetDate) {
+      targetDate = new Date(savedTargetDate);
+    } else {
+      targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + 10); // 10 days from now
+      localStorage.setItem("targetDate", targetDate.toISOString());
+    }
 
     const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = targetDate.getTime() - now;
 
-      const newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const newHours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const newMinutes = Math.floor(
-        (difference % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+      if (difference > 0) {
+        const newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const newHours = Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const newMinutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const newSeconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      setDays(newDays);
-      setHours(newHours);
-      setMinutes(newMinutes);
-      setSeconds(newSeconds);
+        setDays(newDays);
+        setHours(newHours);
+        setMinutes(newMinutes);
+        setSeconds(newSeconds);
+      } else {
+        // Countdown has ended
+        setDays(0);
+        setHours(0);
+        setMinutes(0);
+        setSeconds(0);
+      }
     };
 
     const intervalId = setInterval(updateCountdown, 1000);
@@ -62,6 +77,7 @@ const HomePage = () => {
     // Clear interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -76,7 +92,7 @@ const HomePage = () => {
       });
 
       if (response.ok) {
-        alert("Email submitted successfully");
+        alert("Email submitted successfully, Thankyou:)");
         // Clear the input field or show a success message
         setEmail("");
       } else {
@@ -136,7 +152,7 @@ const HomePage = () => {
                   >
                     <input
                       type="email"
-                      placeholder="Enter your email for waiting list"
+                      placeholder="Enter your email"
                       className="w-full md:w-64 lg:w-80 px-4 py-2 rounded-full bg-black text-sm md:text-base text-foreground shadow-inner focus:outline-none"
                       required
                       value={email}
@@ -214,14 +230,32 @@ const HomePage = () => {
           </div>
         </Container>
       </Wrapper>
-
+       {/* About */}
+      <div id="about">
+       <Wrapper  className="flex flex-col items-center justify-center py-12 relative">
+        <Container>
+          <div className=" mx-auto text-start md:text-center">
+            <SectionBadge title="About" />
+            
+            <p className="text-bold text-muted-foreground mt-6 max-w-4xl  mx-auto">
+            At PitcherAI, we are dedicated to revolutionizing the way influencers and marketers create content. By leveraging cutting-edge AI technology, we transform customer reviews and product insights into powerful, tailored pitches that resonate with diverse audiences. Each piece of content is meticulously reviewed by 100 AI agents, ensuring your pitch is optimized for maximum impact and engagement.
+            </p>
+          </div>
+        </Container>
+        
+      </Wrapper>
+      </div>
       {/* how it works */}
       <Wrapper className="flex flex-col items-center justify-center py-12 relative">
         <Container>
           <div className="max-w-md mx-auto text-start md:text-center">
             <SectionBadge title="The Process" />
             <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-              Three steps to build your perfect pitches
+              Three steps to build your <br/>
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                  perfect pitches
+                </span>
+              
             </h2>
             <p className="text-muted-foreground mt-6">
               Turn your vision into reality in just 3 simple steps
@@ -251,14 +285,21 @@ const HomePage = () => {
       </Wrapper>
 
       {/* features */}
-      <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+      <div id="feature">
+
+      
+      <Wrapper  className="flex flex-col items-center justify-center py-12 relative">
         <div className="hidden md:block absolute top-0 -right-1/3 w-72 h-72 bg-primary rounded-full blur-[10rem] -z-10"></div>
         <div className="hidden md:block absolute bottom-0 -left-1/3 w-72 h-72 bg-indigo-600 rounded-full blur-[10rem] -z-10"></div>
         <Container>
           <div className="max-w-md mx-auto text-start md:text-center">
             <SectionBadge title="Features" />
             <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-              Discover our powerful features
+              Discover our powerful <br/>
+              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+              features
+                </span>
+              
             </h2>
             <p className="text-muted-foreground mt-6">
               Pitcher AI offers a range of features to help you create pitches
@@ -292,6 +333,7 @@ const HomePage = () => {
           </div>
         </Container>
       </Wrapper>
+      </div>
 
       {/* pricing */}
       {/* <Wrapper className="flex flex-col items-center justify-center py-12 relative">

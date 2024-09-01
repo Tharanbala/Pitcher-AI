@@ -1,3 +1,4 @@
 {
+  "/team/page": "app/team/page.js",
   "/(root)/page": "app/(root)/page.js"
 }
