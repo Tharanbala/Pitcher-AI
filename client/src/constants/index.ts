@@ -3,18 +3,18 @@ import { Icons } from "@/components";
 export const perks = [
     {
         icon: Icons.auth,
-        title: "Sign Up",
-        info: "Create your free account to get started with Astra.",
+        title: "Search & Review Analysis",
+        info: "Users search for a product, and our system instantly gathers reviews from platforms like Amazon, Reddit, and more. We analyze these reviews to extract the key pros and cons.",
     },
     {
         icon: Icons.customize,
-        title: "Customize",
-        info: "Choose a template and customize it to fit your needs.",
+        title: "Automated Pitch Generation",
+        info: "Based on the review insights, our AI generates a tailored marketing pitch designed to highlight the product's strengths and address any concerns.",
     },
     {
         icon: Icons.launch,
-        title: "Launch",
-        info: "Publish your website and share it with the world.",
+        title: "Pitch Evaluation & Delivery",
+        info: "We then send the pitch to a panel of 100 AI-driven agents for evaluation. The best-performing pitch is selected and delivered back to the user, ready to be used.",
     },
 ];
 
@@ -31,23 +31,23 @@ export const features = [
     },
     {
         icon: Icons.seo,
+        title: "Platform-Specific Pitches",
+        info: "Generate customized marketing pitches optimized for the unique audiences and formats of various social media platforms, including YouTube, Instagram, and TikTok.",
+    },
+    {
+        icon: Icons.monitor,
         title: "Personalized Audience Segmentation",
         info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
     },
     {
-        icon: Icons.seo,
-        title: "Personalized Audience Segmentation",
-        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
+        icon: Icons.time,
+        title: "Real-Time Agents Feedback",
+        info: "Simulate agents reactions with a true/false evaluation, giving you immediate insight into whether your pitch will convince them to buy the product.",
     },
     {
-        icon: Icons.seo,
-        title: "Personalized Audience Segmentation",
-        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
-    },
-    {
-        icon: Icons.seo,
-        title: "Personalized Audience Segmentation",
-        info: "Automatically create a diverse and customized audience based on age categories and professional backgrounds, ensuring your pitch resonates with the right people.",
+        icon: Icons.language,
+        title: "Multi-Language Support",
+        info: "Create marketing pitches in multiple languages, allowing you to reach and engage with a global audience across different regions and demographics.",
     }
 ];
 
