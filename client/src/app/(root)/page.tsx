@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LampContainer } from "@/components/ui/lamp";
 import Marquee from "@/components/ui/marquee";
@@ -26,6 +27,9 @@ const HomePage = () => {
   const firstRow = reviews.slice(0, reviews.length / 2);
   const secondRow = reviews.slice(reviews.length / 2);
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [waitListCount, setWaitListCount] = useState(33);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   // State for countdown timer
   const [days, setDays] = useState(0);
@@ -78,9 +82,9 @@ const HomePage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/submit-email", {
@@ -92,17 +96,16 @@ const HomePage = () => {
       });
 
       if (response.ok) {
-        alert("Email submitted successfully, Thankyou:)");
-        // Clear the input field or show a success message
+        alert("Email submitted successfully, Thank you :)");
         setEmail("");
       } else {
         console.error("Error submitting email");
-        // Show an error message to the user
       }
     } catch (error) {
       console.error("Error:", error);
-      // Show an error message to the user
       setEmail("");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -144,8 +147,10 @@ const HomePage = () => {
                 pitches using AI.
               </p>
               <div className="flex flex-col items-center justify-center mt-8 md:mt-12 w-full">
+                {/* <div className={buttonVariants({ size: "sm", className: "hidden md:flex" })} style={{ marginBottom: '1rem' }}>People Joined {waitListCount}</div> */}
                 <div className="flex items-center justify-center w-full max-w-lg rounded-full border-t border-foreground/30 backdrop-blur-lg px-2 py-2 md:py-2 gap-2 md:gap-8 shadow-3xl shadow-background/40 cursor-pointer select-none bg-white/20 md:bg-white/20">
                   {/* Form for waitlist */}
+
                   <form
                     onSubmit={handleSubmit}
                     className="flex flex-col md:flex-row items-center gap-2 px-4 w-full"
@@ -164,13 +169,11 @@ const HomePage = () => {
                       size="sm"
                       type="submit"
                       className="mt-2 md:mt-0 md:ml-2 rounded-full border border-foreground/20 active:animate-pulse"
-                      onClick={() => {
-                        if ("vibrate" in window.navigator) {
-                          window.navigator.vibrate(100); // Vibrate for 100 milliseconds
-                        }
-                      }}
+                      onClick={() => setWaitListCount(waitListCount + 1)}
+                      disabled={isSubmitting} // Disable button when submitting
                     >
-                      Join Waitlist
+                      {isSubmitting ? "Submitting..." : "Join Waitlist"}{" "}
+                      {/* Show "Submitting..." when submitting */}
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Button>
                   </form>
@@ -180,21 +183,6 @@ const HomePage = () => {
               </div>
             </div>
 
-            {/* <div className="relative flex items-center py-10 md:py-20 w-full">
-              <div className="absolute top-1/2 left-1/2 -z-10 gradient w-3/4 -translate-x-1/2 h-3/4 -translate-y-1/2 inset-0 blur-[10rem]"></div>
-              <div className="-m-2 rounded-xl p-2 ring-1 ring-inset ring-foreground/20 lg:-m-4 lg:rounded-2xl bg-opacity-50 backdrop-blur-3xl">
-                <Image
-                  src="/assets/dashboard.svg"
-                  alt="banner image"
-                  width={1200}
-                  height={1200}
-                  quality={100}
-                  className="rounded-md lg:rounded-xl bg-foreground/10 shadow-2xl ring-1 ring-border"
-                />
-
-                <BorderBeam size={250} duration={12} delay={9} />
-              </div>
-            </div> */}
             {/* Countdown Timer */}
             <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
               <h2 className="text-2xl font-semibold mb-4">
@@ -230,109 +218,141 @@ const HomePage = () => {
           </div>
         </Container>
       </Wrapper>
-       {/* About */}
+
+      {/* About */}
       <div id="about">
-       <Wrapper  className="flex flex-col items-center justify-center py-12 relative">
-        <Container>
-          <div className=" mx-auto text-start md:text-center">
-            <SectionBadge title="About" />
-            
-            <p className="text-bold text-muted-foreground mt-6 max-w-4xl  mx-auto">
-            At PitcherAI, we are dedicated to revolutionizing the way influencers and marketers create content. By leveraging cutting-edge AI technology, we transform customer reviews and product insights into powerful, tailored pitches that resonate with diverse audiences. Each piece of content is meticulously reviewed by 100 AI agents, ensuring your pitch is optimized for maximum impact and engagement.
-            </p>
-          </div>
-        </Container>
-        
-      </Wrapper>
+        <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+          <Container>
+            <div className=" mx-auto text-start md:text-center">
+              <SectionBadge title="About" />
+
+              <p className="text-bold text-muted-foreground mt-6 max-w-4xl  mx-auto">
+                At PitcherAI, we are dedicated to revolutionizing the way
+                influencers and marketers create content. By leveraging
+                cutting-edge AI technology, we transform customer reviews and
+                product insights into powerful, tailored pitches that resonate
+                with diverse audiences. Each piece of content is meticulously
+                reviewed by 100 AI agents, ensuring your pitch is optimized for
+                maximum impact and engagement.
+              </p>
+            </div>
+          </Container>
+        </Wrapper>
       </div>
+      {/* video */}
+      {/* video */}
+      {/* <div className="relative flex items-center justify-center py-10 md:py-20 w-full px-4 md:px-0">
+        <div className="absolute top-1/2 left-1/2 -z-10 gradient w-4/5 -translate-x-1/2 h-4/5 -translate-y-1/2 inset-0 blur-[10rem]"></div>
+        <div className="flex flex-row items-center justify-center w-full max-w-[700px] -m-2 rounded-xl p-2 ring-1 ring-inset ring-foreground/20 lg:-m-4 lg:rounded-2xl bg-opacity-50 backdrop-blur-3xl">
+          <div className="flex flex-col items-center w-full">
+            {videoLoaded && (
+              <video
+                src="/assets/video.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                onLoadedData={() => setVideoLoaded(true)}
+                className="rounded-md lg:rounded-xl bg-foreground/10 shadow-2xl ring-1 ring-border w-full h-auto aspect-video"
+              />
+            )}
+            {!videoLoaded && (
+              <div className="w-full aspect-video bg-foreground/10 rounded-md lg:rounded-xl flex items-center justify-center">
+                Loading video...
+              </div>
+            )}
+            <BorderBeam size={250} duration={12} delay={9} />
+          </div>
+        </div>
+      </div> */}
       {/* how it works */}
-      <Wrapper className="flex flex-col items-center justify-center py-12 relative">
-        <Container>
-          <div className="max-w-md mx-auto text-start md:text-center">
-            <SectionBadge title="The Process" />
-            <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-              Three steps to build your <br/>
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+      <div id="process">
+        <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+          <Container>
+            <div className="max-w-md mx-auto text-start md:text-center">
+              <SectionBadge title="Process" />
+              <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
+                Three steps to build your <br />
+                <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                   perfect pitches
                 </span>
-              
-            </h2>
-            <p className="text-muted-foreground mt-6">
-              Turn your vision into reality in just 3 simple steps
-            </p>
-          </div>
-        </Container>
-        <Container>
-          <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full divide-x-0 md:divide-x divide-y md:divide-y-0 divide-gray-900 first:border-l-2 lg:first:border-none first:border-gray-900">
-              {perks.map((perk) => (
-                <div
-                  key={perk.title}
-                  className="flex flex-col items-start px-4 md:px-6 lg:px-8 lg:py-6 py-4"
-                >
-                  <div className="flex items-center justify-center">
-                    <perk.icon className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-lg font-medium mt-4">{perk.title}</h3>
-                  <p className="text-muted-foreground mt-2 text-start lg:text-start">
-                    {perk.info}
-                  </p>
-                </div>
-              ))}
+              </h2>
+              <p className="text-muted-foreground mt-6">
+                Turn your vision into reality in just 3 simple steps
+              </p>
             </div>
-          </div>
-        </Container>
-      </Wrapper>
-
-      {/* features */}
-      <div id="feature">
-
-      
-      <Wrapper  className="flex flex-col items-center justify-center py-12 relative">
-        <div className="hidden md:block absolute top-0 -right-1/3 w-72 h-72 bg-primary rounded-full blur-[10rem] -z-10"></div>
-        <div className="hidden md:block absolute bottom-0 -left-1/3 w-72 h-72 bg-indigo-600 rounded-full blur-[10rem] -z-10"></div>
-        <Container>
-          <div className="max-w-md mx-auto text-start md:text-center">
-            <SectionBadge title="Features" />
-            <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
-              Discover our powerful <br/>
-              <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-              features
-                </span>
-              
-            </h2>
-            <p className="text-muted-foreground mt-6">
-              Pitcher AI offers a range of features to help you create pitches
-              from review
-            </p>
-          </div>
-        </Container>
-        <Container>
-          <div className="flex items-center justify-center mx-auto mt-8">
-            <Icons.feature className="w-auto h-80" />
-          </div>
-        </Container>
-        <Container>
-          <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
-              {features.map((feature) => (
-                <div
-                  key={feature.title}
-                  className="flex flex-col items-start lg:items-start px-0 md:px-0"
-                >
-                  <div className="flex items-center justify-center">
-                    <feature.icon className="w-8 h-8" />
+          </Container>
+          <Container>
+            <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full divide-x-0 md:divide-x divide-y md:divide-y-0 divide-gray-900 first:border-l-2 lg:first:border-none first:border-gray-900">
+                {perks.map((perk) => (
+                  <div
+                    key={perk.title}
+                    className="flex flex-col items-start px-4 md:px-6 lg:px-8 lg:py-6 py-4"
+                  >
+                    <div className="flex items-center justify-center">
+                      <perk.icon className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-lg font-medium mt-4">{perk.title}</h3>
+                    <p className="text-muted-foreground mt-2 text-start lg:text-start">
+                      {perk.info}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-medium mt-4">{feature.title}</h3>
-                  <p className="text-muted-foreground mt-2 text-start lg:text-start">
-                    {feature.info}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </Container>
-      </Wrapper>
+          </Container>
+        </Wrapper>
+
+        {/* features */}
+        <div id="feature">
+          <Wrapper className="flex flex-col items-center justify-center py-12 relative">
+            <div className="hidden md:block absolute top-0 -right-1/3 w-72 h-72 bg-primary rounded-full blur-[10rem] -z-10"></div>
+            <div className="hidden md:block absolute bottom-0 -left-1/3 w-72 h-72 bg-indigo-600 rounded-full blur-[10rem] -z-10"></div>
+            <Container>
+              <div className="max-w-md mx-auto text-start md:text-center">
+                <SectionBadge title="Features" />
+                <h2 className="text-3xl lg:text-4xl font-semibold mt-6">
+                  Discover our powerful <br />
+                  <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                    features
+                  </span>
+                </h2>
+                <p className="text-muted-foreground mt-6">
+                  Pitcher AI offers a range of features to help you create
+                  pitches from review
+                </p>
+              </div>
+            </Container>
+            <Container>
+              <div className="flex items-center justify-center mx-auto mt-8">
+                <Icons.feature className="w-auto h-80" />
+              </div>
+            </Container>
+            <Container>
+              <div className="flex flex-col items-center justify-center py-10 md:py-20 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-8">
+                  {features.map((feature) => (
+                    <div
+                      key={feature.title}
+                      className="flex flex-col items-start lg:items-start px-0 md:px-0"
+                    >
+                      <div className="flex items-center justify-center">
+                        <feature.icon className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-lg font-medium mt-4">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground mt-2 text-start lg:text-start">
+                        {feature.info}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Container>
+          </Wrapper>
+        </div>
       </div>
 
       {/* pricing */}

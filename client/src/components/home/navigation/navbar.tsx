@@ -14,7 +14,7 @@ const Navbar = async () => {
                 <div className="flex items-center justify-between h-full mx-auto md:max-w-screen-xl">
                     <div className="flex items-start">
                         <Link href="/" className="flex items-center gap-2">
-                            <Icons.logo className="w-8 h-8" />
+                            <img src='/icons/pitcher_logo.svg' width={30} height={30}/>
                             <span className="text-2xl font-bold">
                                 Pitcher AI
                             </span>
@@ -24,6 +24,7 @@ const Navbar = async () => {
                         <ul className="flex items-center justify-center gap-8">
                             {/* <Link href="#" className="hover:text-foreground/80 text-sm">Pricing</Link> */}
                             <Link href="#about" className="hover:text-foreground/80 text-sm">About</Link>
+                            <Link href="#process" className="hover:text-foreground/80 text-sm">Process</Link>
                             <Link href="#feature" className="hover:text-foreground/80 text-sm">Features</Link>
                             <Link href="/team" className="hover:text-foreground/80 text-sm">Meet the Team</Link>
                         </ul>
@@ -41,9 +42,9 @@ const Navbar = async () => {
                                 </Link>
                             </>
                         )} */}
-                        <button className={buttonVariants({ size: "sm", className: "hidden md:flex" })}>
+                        {/* <button className={buttonVariants({ size: "sm", className: "hidden md:flex" })}>
                             Join Waitlist
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </Container>
