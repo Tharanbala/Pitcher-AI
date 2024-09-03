@@ -26,7 +26,7 @@ const Footer = () => {
               <ul className="mt-4 text-sm text-muted-foreground">
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#about"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     About
@@ -34,7 +34,7 @@ const Footer = () => {
                 </li>
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#process"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     Process
@@ -42,7 +42,7 @@ const Footer = () => {
                 </li>
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#feature"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     Features
