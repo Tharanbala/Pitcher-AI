@@ -2,6 +2,7 @@ import Icons from "@/components/global/icons";
 import { Heart } from "lucide-react";
 import Link from "next/link";
 
+
 const Footer = () => {
   return (
     <footer className="flex flex-col relative items-center justify-center border-t border-border pt-16 pb-8 px-6 lg:px-8 w-full max-w-6xl mx-auto lg:pt-32">
@@ -26,7 +27,7 @@ const Footer = () => {
               <ul className="mt-4 text-sm text-muted-foreground">
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#about"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     About
@@ -34,7 +35,7 @@ const Footer = () => {
                 </li>
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#process"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     Process
@@ -42,7 +43,7 @@ const Footer = () => {
                 </li>
                 <li className="mt-2">
                   <Link
-                    href=""
+                    href="#feature"
                     className="hover:text-foreground transition-all duration-300"
                   >
                     Features
@@ -54,7 +55,7 @@ const Footer = () => {
           </div>
           <div className="md:grid md:grid-cols-2 md:gap-8">
             
-            {/* Team Section */}
+            {/* Team Section  of founder*/}
             <div className="mt-10 md:mt-0 flex flex-col">
               <a href='/team'>
               <h3 className="text-base font-medium text-white">Meet the Team</h3>
