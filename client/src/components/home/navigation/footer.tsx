@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="grid gap-8 xl:grid-cols-3 xl:gap-8 w-full">
         <div className="flex flex-col items-start justify-start md:max-w-[200px]">
           <div className="flex items-start">
-            <Icons.logo className="w-7 h-7" />
+          <img src='/icons/icon.png' width={30} height={30}/>
           </div>
           <p className="text-muted-foreground mt-4 text-sm text-start">
           Turning Reviews into Winning Pitches
@@ -22,30 +22,30 @@ const Footer = () => {
         <div className="grid-cols-2 gap-8 grid mt-16 xl:col-span-2 xl:mt-0">
           <div className="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 className="text-base font-medium text-white">Product</h3>
+              <h3 className="text-base font-medium text-white">Company</h3>
               <ul className="mt-4 text-sm text-muted-foreground">
                 <li className="mt-2">
                   <Link
                     href=""
                     className="hover:text-foreground transition-all duration-300"
                   >
+                    About
+                  </Link>
+                </li>
+                <li className="mt-2">
+                  <Link
+                    href=""
+                    className="hover:text-foreground transition-all duration-300"
+                  >
+                    Process
+                  </Link>
+                </li>
+                <li className="mt-2">
+                  <Link
+                    href=""
+                    className="hover:text-foreground transition-all duration-300"
+                  >
                     Features
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Pricing
-                  </Link>
-                </li>
-                <li className="mt-2">
-                  <Link
-                    href=""
-                    className="hover:text-foreground transition-all duration-300"
-                  >
-                    Testimonials
                   </Link>
                 </li>
               </ul>
