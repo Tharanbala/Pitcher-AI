@@ -6,7 +6,7 @@ export const SITE_CONFIG: Metadata = {
         default: "Pitcher AI",
         template: `%s | Pitcher`
     },
-    description: "Astra is an AI powered website builder that helps you create a website in minutes. No coding skills required. Get started for free!",
+    description: "Pitcher AI converts product reviews into impactful social media pitches using AI.",
     icons: {
         icon: [
             {
@@ -16,8 +16,8 @@ export const SITE_CONFIG: Metadata = {
         ]
     },
     openGraph: {
-        title: "Pitcher - AI Powered Website Builder",
-        description: "Pitcher is an AI powered website builder that helps you create a website in minutes. No coding skills required. Get started for free!",
+        title: "Pitcher AI - Turning Reviews into Winning Pitches.",
+        description: "Pitcher AI converts product reviews into impactful social media pitches using AI.",
         images: [
             {
                 url: "/assets/og-image.png",
@@ -26,14 +26,14 @@ export const SITE_CONFIG: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        creator: "@shreyassihasane",
-        title: "Astra - AI Powered Website Builder",
-        description: "Astra is an AI powered website builder that helps you create a website in minutes. No coding skills required. Get started for free!",
+        creator: "@npm_shubham",
+        title: "Pitcher AI - Turning Reviews into Winning Pitches",
+        description: "Pitcher AI converts product reviews into impactful social media pitches using AI.",
         images: [
             {
                 url: "/assets/og-image.png",
             }
         ]
     },
-    metadataBase: new URL("https://astra-app.vercel.app"),
+    metadataBase: new URL("https://www.pitcherai.tech"),
 };
