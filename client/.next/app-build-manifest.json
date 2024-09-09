@@ -1,14 +1,9 @@
 {
   "pages": {
-    "/(root)/page": [
+    "/team/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(root)/page.js"
-    ],
-    "/(root)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(root)/layout.js"
+      "static/chunks/app/team/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
