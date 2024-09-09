@@ -35,5 +35,5 @@ export const SITE_CONFIG: Metadata = {
             }
         ]
     },
-    metadataBase: new URL("https://www.pitcherai.tech"),
+    metadataBase: new URL("https://pitcher-ai.vercel.app/"),
 };
